@@ -1,0 +1,123 @@
+Router ospf configuration with different areas
+-------------------------------
+R1
+----
+en
+conf t
+hostname R1
+int f0/0 
+ip add 30.0.0.1 255.0.0.0
+no sh
+interface s0/0/0
+ip add 10.0.0.1 255.0.0.0
+no sh
+int s0/0/1
+ip add 20.0.0.1 255.0.0.0
+no sh
+exit
+router ospf 1
+router-id 1.1.1.1
+network 192.168.1.0 0.0.0.255 area 1
+network 10.0.0.0 0.255.255.255 area 0
+network 20.0.0.0 0.255.255.255 area 0
+network 30.0.0.0 0.255.255.255 area 0
+
+Router ospf configuration with different areas
+-------------------------------
+R2
+----
+en
+conf t
+hostname R2
+interface s0/0/0
+ip add 10.0.0.2 255.0.0.0
+no sh
+int s0/0/1
+ip add 40.0.0.1 255.0.0.0
+no sh
+exit
+router ospf 1
+router-id 2.2.2.2
+network 10.0.0.0 0.255.255.255 area 0
+network 40.0.0.0 0.255.255.255 area 0
+ 
+
+Router ospf configuration with different areas
+-------------------------------
+R3
+----
+en
+conf t
+hostname R3
+interface f0/1
+ip add 60.0.0.1 255.0.0.0
+no sh
+int s0/0/1
+ip add 40.0.0.2 255.0.0.0
+no sh
+exit
+int f0/0 50.0.0.1 255.0.0.0 
+no sh
+router ospf 1
+router-id 3.3.3.3
+network 40.0.0.0 0.255.255.255 area 0
+network 50.0.0.0 0.255.255.255 area 0
+network 60.0.0.0 0.255.255.255 area 2
+ 
+
+Router ospf configuration with different areas
+-------------------------------
+R4
+----
+en
+conf t
+hostname R4
+int f0/0 
+ip add 50.0.0.2 255.0.0.0
+no sh
+int s0/0/1
+ip add 20.0.0.2 255.0.0.0
+no sh
+exit
+router ospf 1
+router-id 4.4.4.4
+network 20.0.0.0 0.255.255.255 area 0
+network 50.0.0.0 0.255.255.255 area 0
+
+Router ospf configuration with different areas
+-------------------------------
+R5
+----
+en
+conf t
+hostname R5
+int f0/0 
+ip add 30.0.0.2 255.0.0.0
+no sh
+int f0/1
+ip add 192.168.1.1 255.255.255.0
+no sh
+exit
+router ospf 1
+router-id 5.5.5.5
+network 30.0.0.0 0.255.255.255 area 0
+network 192.168.1.0 0.0.0.255 area 1
+
+Router ospf configuration with different areas
+-------------------------------
+R6
+----
+en
+conf t
+hostname R6
+int f0/0 
+ip add 192.168.2.1 255.255.255.0
+no sh
+int f0/1
+ip add 60.0.0.2 255.0.0.0
+no sh
+exit
+router ospf 1
+router-id 6.6.6.6
+network 60.0.0.0 0.255.255.255 area 2
+network 192.168.2.0 0.0.0.255 area 2
